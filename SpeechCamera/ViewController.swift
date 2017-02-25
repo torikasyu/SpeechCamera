@@ -120,15 +120,17 @@ class ViewController: UIViewController,AVCapturePhotoCaptureDelegate,SFSpeechRec
             var isFinal = false
             
             if let result = result {
-                let rec = result.bestTranscription.formattedString
+                //let rec = result.bestTranscription.formattedString
                 
-                self.textView.text = rec
+                if let t = result.bestTranscription.segments.last?.substring {
+                    self.textView.text = t
+                }
                 isFinal = result.isFinal
 
-                if(rec == "ポケモン")
+                if (result.bestTranscription.segments.last?.substring.lowercased() == "チーズ")
+                //if(rec == "チーズ")
                 {
                     self.shoot()
-                    isFinal = true;
                 }
                 
             }
